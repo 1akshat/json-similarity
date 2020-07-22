@@ -1,6 +1,6 @@
 const axios = require("axios").default;
 
-const getJsonSimilarity = () => {
+window.getJsonSimilarity = () => {
   axios
     .get("/compare_json_files")
     .then(function (response) {
@@ -16,3 +16,5 @@ const getJsonSimilarity = () => {
       // always executed
     });
 };
+
+export default getJsonSimilarity;

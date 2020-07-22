@@ -28,14 +28,14 @@ def compare_hashes(hash1, hash2)
             compare_hashes(hash1[key], hash2[key])
         end
     end
-    # p @matched_values
-    # p @unmatched_values
+    p @matched_values
+    p @unmatched_values
 end
 
 def compare_primitives(key, value, hash2)
-    p "--------------------------"
-    p value, hash2[key]
-    if !hash2.nil?
+    # p "--------------------------"
+    # p value, hash2[key]
+    unless hash2.nil?
         @matched_values += 1 if hash2[key] == value
         @unmatched_values += 1 if hash2[key] != value
     else
@@ -68,8 +68,11 @@ def compare_arrays(key, value, hash1, hash2)
         end
     end
     array_to_loop.each_with_index do |deep_object, index|
-        compare_hashes(deep_object, other_array[index]) unless other_array[index].nil?
-        compare_hashes(deep_object, {}) if other_array[index].nil?
+        if other_array and !other_array[index].nil?
+            compare_hashes(deep_object, other_array[index]) 
+        else
+            compare_hashes(deep_object, {})
+        end
     end
 end
 

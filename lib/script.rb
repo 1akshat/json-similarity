@@ -8,13 +8,14 @@ def compare_files(file1, file2)
     file2_data = read_file(file2)
 
     compare_hashes(file1_data, file2_data)
+    similarity_score
+end
+
+def similarity_score
+    1 - (@unmatched_values.to_f / (@matched_values + @unmatched_values))
 end
 
 def compare_hashes(hash1, hash2)
-    # p "=================="
-    # p hash1
-    # p "--------------"
-    # p hash2
     hash1.each do |key, value|
         if (value.kind_of? (String) or value.kind_of? (Integer) or value.kind_of? (Float) or value.kind_of? (TrueClass) or value.kind_of? (FalseClass))
             compare_primitives(key, value, hash2)
@@ -28,13 +29,9 @@ def compare_hashes(hash1, hash2)
             compare_hashes(hash1[key], hash2[key])
         end
     end
-    p @matched_values
-    p @unmatched_values
 end
 
 def compare_primitives(key, value, hash2)
-    # p "--------------------------"
-    # p value, hash2[key]
     unless hash2.nil?
         @matched_values += 1 if hash2[key] == value
         @unmatched_values += 1 if hash2[key] != value
@@ -82,4 +79,4 @@ def read_file(file_name)
     return data
 end
 
-compare_files('../data/BreweriesMaster.json', '../data/BreweriesSample5.json')
+p compare_files('../data/BreweriesMaster.json', '../data/BreweriesSample5.json')

@@ -11,6 +11,10 @@ def compare_files(file1, file2)
 end
 
 def compare_hashes(hash1, hash2)
+    # p "=================="
+    # p hash1
+    # p "--------------"
+    # p hash2
     hash1.each do |key, value|
         if (value.kind_of? (String) or value.kind_of? (Integer) or value.kind_of? (Float) or value.kind_of? (TrueClass) or value.kind_of? (FalseClass))
             compare_primitives(key, value, hash2)
@@ -19,7 +23,7 @@ def compare_hashes(hash1, hash2)
         if value.kind_of? (Array)
             compare_arrays(key, value, hash1, hash2)
         end
-            
+
         if value.kind_of? (Hash)
             compare_hashes(hash1[key], hash2[key])
         end
@@ -39,6 +43,8 @@ def compare_primitives(key, value, hash2)
     end
 end
 def compare_arrays(key, value, hash1, hash2)
+    array_to_loop = []
+    other_array = []
     # value is an array
     value.each do |individual_obj|
         if individual_obj.kind_of? (Hash)
@@ -55,14 +61,15 @@ def compare_arrays(key, value, hash1, hash2)
                     array_to_loop = hash1[key]
                     other_array = hash2[key]
                 end
-                array_to_loop.each_with_index do |deep_object, index|
-                    compare_hashes(deep_object, other_array[index]) unless other_array[index].nil?
-                    compare_hashes(deep_object, {}) if other_array[index].nil?
-                end
             else
-                compare_hashes(hash1[key], hash2[key])
+                array_to_loop = hash1[key]
+                other_array = hash2[key]
             end
         end
+    end
+    array_to_loop.each_with_index do |deep_object, index|
+        compare_hashes(deep_object, other_array[index]) unless other_array[index].nil?
+        compare_hashes(deep_object, {}) if other_array[index].nil?
     end
 end
 

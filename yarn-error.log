@@ -1,0 +1,50 @@
+Arguments: 
+  /home/akki/.nvm/versions/node/v13.9.0/bin/node /home/akki/.yarn/bin/yarn.js check --integrity
+
+PATH: 
+  /home/akki/.ruby/bin:/home/akki/.rbenv/versions/2.5.1/bin:/home/akki/.rbenv/libexec:/home/akki/.rbenv/plugins/ruby-build/bin:/home/akki/.yarn/bin:/home/akki/.config/yarn/global/node_modules/.bin:/home/akki/.nvm/versions/node/v13.9.0/bin:/home/akki/.rbenv/shims:/home/akki/.rbenv/bin:/home/akki/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:~/.ruby/bin
+
+Yarn version: 
+  1.22.4
+
+Node version: 
+  13.9.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  TypeError: Cannot read property '@rails/actioncable@^6.0.0' of undefined
+      at /home/akki/.yarn/lib/cli.js:47688:25
+      at Array.filter (<anonymous>)
+      at InstallationIntegrityChecker.<anonymous> (/home/akki/.yarn/lib/cli.js:47687:38)
+      at Generator.next (<anonymous>)
+      at step (/home/akki/.yarn/lib/cli.js:310:30)
+      at /home/akki/.yarn/lib/cli.js:328:14
+      at new Promise (<anonymous>)
+      at new F (/home/akki/.yarn/lib/cli.js:5301:28)
+      at InstallationIntegrityChecker.<anonymous> (/home/akki/.yarn/lib/cli.js:307:12)
+      at InstallationIntegrityChecker.check (/home/akki/.yarn/lib/cli.js:47736:21)
+
+npm manifest: 
+  {
+    "name": "json_similarity",
+    "private": true,
+    "dependencies": {
+      "@rails/actioncable": "^6.0.0",
+      "@rails/activestorage": "^6.0.0",
+      "@rails/ujs": "^6.0.0",
+      "@rails/webpacker": "4.2.2",
+      "turbolinks": "^5.2.0"
+    },
+    "version": "0.1.0",
+    "devDependencies": {
+      "webpack-dev-server": "^3.11.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

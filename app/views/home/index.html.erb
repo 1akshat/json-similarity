@@ -3,13 +3,27 @@
     <button type="button" class="btn btn-secondary" onclick="getJsonSimilarity();">Compute Similarity Score</button>
 </nav>
 
-<div class="body" style="background-color: hsl(200, 6%, 10%)">
+<div class="alert alert-primary" id="success-alert" role="alert" style="float: right; top: 80px; width: 300px; right: 20px; position: absolute; z-index: 999; display: none;">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <p id="success-message"></p>
+</div>
+
+<div class="alert alert-danger" id="error-alert" role="alert" style="float: right; top: 80px; width: 300px; right: 20px; position: absolute; z-index: 999; display: none;">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <p id="error-message"></p>
+</div>
+
+<div class="body" style="background-color: hsl(200, 6%, 10%); position: relative;">
         <div class="row">
             <div class="col-md-6">
-                <textarea class="form-control rounded-0" id="exampleFormControlTextarea11" style="height: 100vh; background-color: hsl(200, 6%, 10%); color: #FFF; font-size: 16px; font-family: 'Monospace'; border: none; padding: 40px;"></textarea>
+                <textarea class="form-control rounded-0" id="json1" style="height: 100vh; background-color: hsl(200, 6%, 10%); color: #FFF; font-size: 16px; font-family: 'Monospace'; border: none; padding: 40px;"></textarea>
             </div>
             <div class="col-md-6" style="border-left: 10px solid black; height: 100vh;">
-                <textarea class="form-control rounded-0" id="exampleFormControlTextarea11" style="height: 100vh; background-color: hsl(200, 6%, 10%); color: #FFF; font-size: 16px; font-family: 'Monospace'; border: none; padding: 40px;"></textarea>
+                <textarea class="form-control rounded-0" id="json2" style="height: 100vh; background-color: hsl(200, 6%, 10%); color: #FFF; font-size: 16px; font-family: 'Monospace'; border: none; padding: 40px;"></textarea>
             </div>
         </div>
     </div>

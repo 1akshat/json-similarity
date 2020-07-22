@@ -1,9 +1,10 @@
 class HomeController < ApplicationController
 
+  skip_before_action :verify_authenticity_token
+
   include HomeHelper
 
   def index
-    
   end
 
   def compare_json_files

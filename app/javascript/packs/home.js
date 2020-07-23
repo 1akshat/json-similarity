@@ -33,7 +33,10 @@ window.getJsonSimilarity = () => {
         // handle error
         console.log(error);
         document.getElementById("error-alert").style.display = "block";
-        document.getElementById("error-message").innerHTML = error;
+        document.getElementById("error-message").innerHTML = `Invalid JSON`;
+        setTimeout(function () {
+          document.getElementById("error-alert").style.display = "none";
+        }, 2000);
       })
       .finally(function () {
         // always executed
@@ -41,5 +44,8 @@ window.getJsonSimilarity = () => {
   } catch {
     document.getElementById("error-alert").style.display = "block";
     document.getElementById("error-message").innerHTML = `Invalid JSON`;
+    setTimeout(function () {
+      document.getElementById("error-alert").style.display = "none";
+    }, 2000);
   }
 };

@@ -1,5 +1,5 @@
 {
-  "state": "MT",
+  "state": "OKOK",
   "state-bird": "Western Meadowloark",
   "state-fish": "Cutthroat Trout",
   "breweries": [
@@ -7,7 +7,7 @@
       "name": "Madison River Brewing",
       "location": {
         "address": "20900 Frontage Rd Building B",
-        "city": "Belgrade",
+        "city": "Palampur",
         "state": "MT",
         "zip-code": "59714",
         "GPS": {

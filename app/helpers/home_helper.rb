@@ -10,13 +10,32 @@ module HomeHelper
     # end
     
     def similarity_score
-        1 - (@unmatched_values.to_f / (@matched_values + @unmatched_values))
+        (@matched_values.to_f / (@matched_values + @unmatched_values))
     end
     
     def compare_hashes(hash1, hash2)
-        hash1.each do |key, value|
+        hash1_keys = hash1.keys
+        hash2_keys = hash2.keys
+    
+        if hash1_keys.nil?
+            hash1_keys = []
+        end
+    
+        if hash2_keys.nil?
+            hash2_keys = []
+        end
+    
+        if hash1_keys.length > hash2_keys.length
+            iterable_hash = hash1
+            comparable_hash = hash2
+        else
+            iterable_hash = hash2
+            comparable_hash = hash1
+        end
+        iterable_hash.each do |key, value|
+    
             if (value.kind_of? (String) or value.kind_of? (Integer) or value.kind_of? (Float) or value.kind_of? (TrueClass) or value.kind_of? (FalseClass))
-                compare_primitives(key, value, hash2)
+                compare_primitives(key, value, comparable_hash)
             end
     
             if value.kind_of? (Array)
@@ -33,7 +52,7 @@ module HomeHelper
                 if hash2[key].nil?
                     comparable_hash2 = {}
                 else
-                    comparable_hash2 = hash1[key]
+                    comparable_hash2 = hash2[key]
                 end
                 compare_hashes(comparable_hash1, comparable_hash2)
             end
@@ -42,9 +61,6 @@ module HomeHelper
     end
     
     def compare_primitives(key, value, hash2)
-        p "-----------"
-        p value
-        p hash2[key]
         unless hash2.nil?
             @matched_values += 1 if hash2[key] == value
             @unmatched_values += 1 if hash2[key] != value
@@ -53,6 +69,7 @@ module HomeHelper
         end
         p @matched_values, @unmatched_values
     end
+    
     def compare_arrays(key, value, hash1, hash2)
         array_to_loop = []
         other_array = []
@@ -77,6 +94,9 @@ module HomeHelper
                     other_array = hash2[key]
                 end
             end
+        end
+        if array_to_loop.nil?
+            array_to_loop = {}
         end
         array_to_loop.each_with_index do |deep_object, index|
             if other_array and !other_array[index].nil?

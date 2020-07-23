@@ -26,18 +26,33 @@ def compare_hashes(hash1, hash2)
         end
 
         if value.kind_of? (Hash)
-            compare_hashes(hash1[key], hash2[key])
+            if hash1[key].nil?
+                comparable_hash1 = {}
+            else
+                comparable_hash1 = hash1[key]
+            end
+
+            if hash2[key].nil?
+                comparable_hash2 = {}
+            else
+                comparable_hash2 = hash1[key]
+            end
+            compare_hashes(comparable_hash1, comparable_hash2)
         end
     end
 end
 
 def compare_primitives(key, value, hash2)
+    p "-----------"
+    p value
+    p hash2[key]
     unless hash2.nil?
         @matched_values += 1 if hash2[key] == value
         @unmatched_values += 1 if hash2[key] != value
     else
         @unmatched_values += 1
     end
+    p @matched_values, @unmatched_values
 end
 def compare_arrays(key, value, hash1, hash2)
     array_to_loop = []
@@ -66,7 +81,7 @@ def compare_arrays(key, value, hash1, hash2)
     end
     array_to_loop.each_with_index do |deep_object, index|
         if other_array and !other_array[index].nil?
-            compare_hashes(deep_object, other_array[index]) 
+            compare_hashes(deep_object, other_array[index])
         else
             compare_hashes(deep_object, {})
         end
@@ -79,4 +94,4 @@ def read_file(file_name)
     return data
 end
 
-p compare_files('../data/BreweriesMaster.json', '../data/BreweriesSample5.json')
+p compare_files('../config/data/BreweriesMaster.json', '../config/data/BreweriesSample3.json')

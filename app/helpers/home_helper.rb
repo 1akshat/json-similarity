@@ -2,6 +2,13 @@ require "json"
 
 module HomeHelper
 
+    # def compare_files(file1, file2)
+    #     file1_data = read_file(file1)
+    #     file2_data = read_file(file2)
+    
+    #     compare_hashes(file1_data, file2_data)
+    # end
+    
     def similarity_score
         1 - (@unmatched_values.to_f / (@matched_values + @unmatched_values))
     end
@@ -17,19 +24,34 @@ module HomeHelper
             end
     
             if value.kind_of? (Hash)
-                compare_hashes(hash1[key], hash2[key])
+                if hash1[key].nil?
+                    comparable_hash1 = {}
+                else
+                    comparable_hash1 = hash1[key]
+                end
+    
+                if hash2[key].nil?
+                    comparable_hash2 = {}
+                else
+                    comparable_hash2 = hash1[key]
+                end
+                compare_hashes(comparable_hash1, comparable_hash2)
             end
         end
         similarity_score
     end
     
     def compare_primitives(key, value, hash2)
+        p "-----------"
+        p value
+        p hash2[key]
         unless hash2.nil?
             @matched_values += 1 if hash2[key] == value
             @unmatched_values += 1 if hash2[key] != value
         else
             @unmatched_values += 1
         end
+        p @matched_values, @unmatched_values
     end
     def compare_arrays(key, value, hash1, hash2)
         array_to_loop = []
@@ -58,7 +80,7 @@ module HomeHelper
         end
         array_to_loop.each_with_index do |deep_object, index|
             if other_array and !other_array[index].nil?
-                compare_hashes(deep_object, other_array[index]) 
+                compare_hashes(deep_object, other_array[index])
             else
                 compare_hashes(deep_object, {})
             end

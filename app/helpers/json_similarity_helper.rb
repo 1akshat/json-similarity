@@ -1,19 +1,17 @@
 require "json"
 
-module HomeHelper
-
-    # def compare_files(file1, file2)
-    #     file1_data = read_file(file1)
-    #     file2_data = read_file(file2)
-    
-    #     compare_hashes(file1_data, file2_data)
-    # end
+module JsonSimilarityHelper
     
     def similarity_score
         (@matched_values.to_f / (@matched_values + @unmatched_values))
     end
     
     def compare_hashes(hash1, hash2)
+
+        if !hash1.kind_of? (Hash) or !hash2.kind_of? (Hash)
+            raise "Expected Hash Type."
+        end
+
         hash1_keys = hash1.keys
         hash2_keys = hash2.keys
     
@@ -67,7 +65,6 @@ module HomeHelper
         else
             @unmatched_values += 1
         end
-        p @matched_values, @unmatched_values
     end
     
     def compare_arrays(key, value, hash1, hash2)
@@ -112,5 +109,12 @@ module HomeHelper
         data = JSON.load file
         return data
     end
+
+    # def compare_files(file1, file2)
+    #     file1_data = read_file(file1)
+    #     file2_data = read_file(file2)
+    
+    #     compare_hashes(file1_data, file2_data)
+    # end
 
 end

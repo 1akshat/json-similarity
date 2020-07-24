@@ -16,35 +16,36 @@ window.getJsonSimilarity = () => {
         charset: "utf-8",
       },
     })
-      .then(function (response) {
+      .then((response) => {
         // handle success
         response = response.data;
         console.log(response);
         if (response.success === false) {
           throw new Error(response["errors"][0]);
         }
-        document.getElementById("success-alert").style.display = "none";
         document.getElementById("success-alert").style.display = "block";
         document.getElementById(
           "success-message"
         ).innerHTML = `The Similarity score between the given json files is: ${response.result.score}`;
+        setTimeout(() => {
+          document.getElementById("success-alert").style.display = "none";
+        }, 3000);
       })
-      .catch(function (error) {
+      .catch((error) => {
         // handle error
-        console.log(error);
         document.getElementById("error-alert").style.display = "block";
         document.getElementById("error-message").innerHTML = `Invalid JSON`;
-        setTimeout(function () {
+        setTimeout(() => {
           document.getElementById("error-alert").style.display = "none";
         }, 2000);
       })
-      .finally(function () {
+      .finally(() => {
         // always executed
       });
   } catch {
     document.getElementById("error-alert").style.display = "block";
     document.getElementById("error-message").innerHTML = `Invalid JSON`;
-    setTimeout(function () {
+    setTimeout(() => {
       document.getElementById("error-alert").style.display = "none";
     }, 2000);
   }

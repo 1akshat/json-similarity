@@ -8,18 +8,22 @@ class JsonSimilarityController < ApplicationController
   end
 
   def compare_json_files
+    # These global vars will be capturing the counters in the helper
     @matched_values = 0
     @unmatched_values = 0
+    # First Key Expected in params: file1_data
     if params[:file1_data].present?
       file1_data = params[:file1_data].as_json
     else
       raise "No Input Present."
     end
+    # First Key Expected in params: file2_data
     if params[:file2_data].present?
       file2_data = params[:file2_data].as_json 
     else
       raise "No Input Present."
     end
+    # Empty Response Object Instantiated
     standard_response = {}
     begin
       data = compare_hashes(file1_data, file2_data)
@@ -34,6 +38,7 @@ class JsonSimilarityController < ApplicationController
       standard_response['at'] = Time.now
       standard_response['errors'] = [e]
     end
+    
     render json: standard_response
   end
 

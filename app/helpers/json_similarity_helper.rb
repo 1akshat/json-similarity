@@ -70,7 +70,6 @@ module JsonSimilarityHelper
                     'value': value
                 }
             end
-            
         else
             @unmatched_values += 1
         end
@@ -127,7 +126,7 @@ module JsonSimilarityHelper
 
     def similarity_score
         # Algo: Truthy/(Truthy + Falsy)
-        (@matched_values.to_f / (@matched_values + @unmatched_values))
+        (@matched_values.to_f / (@matched_values + @unmatched_values)).round(4)
     end
 
     def parse_final_data

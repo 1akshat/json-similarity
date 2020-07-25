@@ -1,15 +1,47 @@
 <div style="position: fixed; z-index: 9999; width: 100%;">
     <nav class="navbar navbar-dark bg-dark">
         <a class="navbar-brand" href="/" style="font-size: 26px; font-family: 'Monospace'">{} json similarity</a>
-        <button type="button" class="btn btn-secondary" onclick="getJsonSimilarity();">Compute Similarity Score</button>
+        <div class="row" style="margin-right: 10px;">
+            <button type="button" id="show-diff-button" class="btn btn-secondary" onclick="getJsonSimilarity();">
+                DIAGNOSTIC INFO
+            </button>
+            <button type="button" id="open-modal" data-toggle="modal" style="display: none;"></button>
+        </div>
     </nav>
 </div>
 
-<div class="alert alert-primary" id="success-alert" role="alert" style="float: right; top: 80px; width: 300px; right: 20px; position: absolute; z-index: 999; display: none;">
-    <p id="success-message"></p>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="top: 50px;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">DIANOSTIC INFO</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="success-message" style="color: #0655A0; font-size: 16px;">
+                </p>
+                <p style="13px;">NOTE: Below is the list of different key value pairs.</p>
+                <table class="table" id="diffTable">
+                    <thead>
+                        <tr>
+                            <th>Key</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="alert alert-danger" id="error-alert" role="alert" style="float: right; top: 80px; width: 300px; right: 20px; position: absolute; z-index: 999; display: none;">
+<div class="alert alert-danger" id="error-alert" role="alert" style="float: right; top: 150px; width: 300px; right: 20px; position: absolute; z-index: 999999; display: none;">
     <p id="error-message"></p>
 </div>
 

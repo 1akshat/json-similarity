@@ -17,19 +17,32 @@ window.getJsonSimilarity = () => {
       },
     })
       .then((response) => {
+        console.log("OK");
         // handle success
         response = response.data;
-        console.log(response);
         if (response.success === false) {
+          console.log("THROW ERROR");
           throw new Error(response["errors"][0]);
         }
-        document.getElementById("success-alert").style.display = "block";
+        let modalButton = document.getElementById("open-modal");
+        modalButton.dataset.target = "#exampleModal";
+        modalButton.click();
+        document.getElementById("show-diff-button").style.display = "block";
+        const table = document.getElementById("diffTable");
         document.getElementById(
           "success-message"
-        ).innerHTML = `The Similarity score between the given json files is: ${response.result.score}`;
-        setTimeout(() => {
-          document.getElementById("success-alert").style.display = "none";
-        }, 3000);
+        ).innerHTML = `The similarity score between the given json files is: ${response.result.score}`;
+        // Resetting the existing table rows
+        while (table.rows.length > 1) {
+          table.deleteRow(1);
+        }
+        for (const data of response.result.diff) {
+          let row = table.insertRow();
+          let key = row.insertCell(0);
+          key.innerHTML = data.key;
+          let value = row.insertCell(1);
+          value.innerHTML = data.value;
+        }
       })
       .catch((error) => {
         // handle error
@@ -43,6 +56,9 @@ window.getJsonSimilarity = () => {
         // always executed
       });
   } catch {
+    // Don't Show the modal in case of invalid json
+    let modalButton = document.getElementById("open-modal");
+    modalButton.dataset.target = "";
     document.getElementById("error-alert").style.display = "block";
     document.getElementById("error-message").innerHTML = `Invalid JSON`;
     setTimeout(() => {

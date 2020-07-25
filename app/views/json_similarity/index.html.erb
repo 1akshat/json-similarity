@@ -1,4 +1,4 @@
-<div style="position: fixed; z-index: 9999; width: 100%;">
+<div style="position: fixed; z-index: 1; width: 100%;">
     <nav class="navbar navbar-dark bg-dark">
         <a class="navbar-brand" href="/" style="font-size: 26px; font-family: 'Monospace'">{} json similarity</a>
         <div class="row" style="margin-right: 10px;">
@@ -10,7 +10,7 @@
     </nav>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="top: 50px;">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -27,7 +27,8 @@
                     <thead>
                         <tr>
                             <th>Key</th>
-                            <th>Value</th>
+                            <th>Hash 1 Value</th>
+                            <th>Hash 2 Value</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,7 +42,7 @@
     </div>
 </div>
 
-<div class="alert alert-danger" id="error-alert" role="alert" style="float: right; top: 150px; width: 300px; right: 20px; position: absolute; z-index: 999999; display: none;">
+<div class="alert alert-danger" id="error-alert" role="alert" style="float: right; top: 150px; width: 300px; right: 20px; position: absolute; z-index: 2; display: none;">
     <p id="error-message"></p>
 </div>
 

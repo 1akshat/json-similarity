@@ -17,11 +17,9 @@ window.getJsonSimilarity = () => {
       },
     })
       .then((response) => {
-        console.log("OK");
         // handle success
         response = response.data;
         if (response.success === false) {
-          console.log("THROW ERROR");
           throw new Error(response["errors"][0]);
         }
         let modalButton = document.getElementById("open-modal");
@@ -40,8 +38,10 @@ window.getJsonSimilarity = () => {
           let row = table.insertRow();
           let key = row.insertCell(0);
           key.innerHTML = data.key;
-          let value = row.insertCell(1);
-          value.innerHTML = data.value;
+          let value1 = row.insertCell(1);
+          value1.innerHTML = data.value_one === "" ? "NIL" : data.value_one;
+          let value2 = row.insertCell(2);
+          value2.innerHTML = data.value_two === "" ? "NIL" : data.value_two;
         }
       })
       .catch((error) => {

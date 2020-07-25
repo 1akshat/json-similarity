@@ -67,7 +67,8 @@ module JsonSimilarityHelper
                 @unmatched_values += 1 
                 @reason << {
                     'key': key,
-                    'value': value
+                    'value_one': value,
+                    'value_two': hash2[key]
                 }
             end
         else

@@ -11,6 +11,7 @@ class JsonSimilarityController < ApplicationController
     # These global vars will be capturing the counters in the helper
     @matched_values = 0
     @unmatched_values = 0
+    @reason = []
     # First Key Expected in params: file1_data
     if params[:file1_data].present?
       file1_data = params[:file1_data].as_json
@@ -30,9 +31,7 @@ class JsonSimilarityController < ApplicationController
       standard_response['success'] = true
       standard_response['at'] = Time.now
       standard_response['errors'] = []
-      standard_response['result'] = {
-        :score => data
-      }
+      standard_response['result'] = data
     rescue Exception => e
       standard_response['success'] = false
       standard_response['at'] = Time.now

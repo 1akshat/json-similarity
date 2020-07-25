@@ -54,8 +54,7 @@ module JsonSimilarityHelper
                 compare_hashes(comparable_hash1, comparable_hash2)
             end
         end
-        # This returns similarity score function that return the value
-        similarity_score
+        parse_final_data
     end
     
     # The parameters are key and value from the first hash and complete second hash
@@ -64,7 +63,14 @@ module JsonSimilarityHelper
         unless hash2.nil?
             # Check if Second Hash is containing the same key and value
             @matched_values += 1 if hash2[key] == value
-            @unmatched_values += 1 if hash2[key] != value
+            if hash2[key] != value
+                @unmatched_values += 1 
+                @reason << {
+                    'key': key,
+                    'value': value
+                }
+            end
+            
         else
             @unmatched_values += 1
         end
@@ -122,6 +128,13 @@ module JsonSimilarityHelper
     def similarity_score
         # Algo: Truthy/(Truthy + Falsy)
         (@matched_values.to_f / (@matched_values + @unmatched_values))
+    end
+
+    def parse_final_data
+        {
+            score: similarity_score,
+            diff: @reason
+        }
     end
 
 end
